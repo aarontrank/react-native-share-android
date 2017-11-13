@@ -1,0 +1,49 @@
+// Defining the classpath of all the Gradle plugins
+buildscript {
+    dependencies {
+        classpath bp('tool.classpath').files
+    }
+}
+// The 'android-plugin-collection' plugin MUST be applied before the 'android' plugin
+// because it constructs the symlinks for the Android SDK that the 'android' plugin requires to function
+apply plugin: 'android-plugin-collection'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion Integer.parseInt(bp('[AndroidSDKPlatform]package-major-version').string)
+    buildToolsVersion bp('[AndroidSDKBuildTools]package-major-version').string
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 24
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            consumerProguardFiles 'proguard-project.pro'
+        }
+
+        release {
+            consumerProguardFiles 'proguard-project.pro'
+        }
+    }
+}
+
+// Fortify should be set to true but is set to false because use of WRITE_EXTERNAL_STORAGE permission
+// is considered unsafe.  This permission needs to be used in order for this module to save images
+// captured from the camera.  Hence fortify is disabled.
+staticAnalysis {
+    checkstyleEnabled = false
+    findBugsEnabled = true
+    fortifyEnabled = false
+}
+
+dependencies {
+    bp('direct.name').string.split(' ').each {
+        compile brazil(it)
+    }
+}

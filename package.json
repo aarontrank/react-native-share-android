@@ -1,0 +1,15 @@
+{
+   "name": "react-native-share-android",
+   "version": "0.1.0",
+   "description": "A react native sharing package for android that supports image sharing. Meant to bridge the gap between the IOS and Android functionality of the built in Share api (RN 0.41.2)",
+   "main": "index.js",
+   "keywords": [
+     "react-native",
+     "share"
+   ],
+   "author": "Aaron Trank <tranka@amazon.com>",
+   "license": "Apache License Version 2.0",
+   "peerDependencies": {
+     "react-native": "*"
+   }
+ }

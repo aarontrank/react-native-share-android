@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.trank">
+    <application>
+        <provider
+            android:name="org.trank.ShareAndroidFileProvider"
+            android:authorities="${applicationId}.ShareAndroidProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/share_android_provider_paths" />
+        </provider>
+    </application>
+</manifest>
